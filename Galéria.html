@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galéria</title>
+    <link rel="icon" href="Gallery.jpg" type="image/icon type">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            background-image: url("White-brick-wall-background-texture-PhotosPublic4419FD.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .gallery-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .gallery {
+            border: 3px solid #3f3939;
+            background-color: rgba(207, 236, 255, 0.9);
+            font-weight: 600;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .gallery:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-bottom: 2px solid #3f3939;
+            cursor: pointer; /* Képek kattinthatóak */
+        }
+
+        .desc {
+            padding: 15px;
+            font-size: 22px;
+        }
+
+        h1 {
+            font-family: 'Black Ops One', sans-serif;
+            text-align: center;
+            font-size: 3.5rem;
+            margin: 20px 0;
+            color: #333;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .info-box {
+            background-color: rgba(207, 236, 255, 0.7);
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            margin: 50px auto;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            text-align: justify;
+            font-size: 21px;
+        }
+
+        /* Modális ablak stílusa */
+        .modal {
+            display: none; /* Kezdetben rejtve */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Átlátszó fekete háttér */
+            overflow: auto;
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        /* Nyilak a képek között */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.3s;
+    cursor: pointer;
+    user-select: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+}
+
+.prev {
+    left: 0;
+    border-radius: 50%;
+}
+
+.next {
+    right: 0;
+    border-radius: 50%;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+/* Kép sarkainak lekerekítése */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    border-radius: 15px; /* Kép sarkainak lekerekítése */
+}
+
+/* Vissza nyíl a bal felső sarokban */
+.back-button {
+    position: fixed;
+    top: 40px;
+    left: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 2;
+}
+
+.back-button:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+
+    </style>
+</head>
+<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+
+<!-- Vissza nyíl a bal felső sarokban -->
+<!-- Vissza nyíl link a bal felső sarokban -->
+<a href="index0.html" class="back-button">&#8592; Vissza</a>
+
+
+
+    <h1>Galériánk termékeinkről</h1>
+
+    <div class="gallery-container">
+        <div class="gallery">
+            <img src="Aljzatkiegyenlítő.jpg" alt="Aljzatkiegyenlítő" onclick="openModal(this)">
+            <div class="desc">Aljzatkiegyenlítő</div>
+        </div>
+
+        <div class="gallery">
+            <img src="Cserepek.jpg" alt="Cserepek" onclick="openModal(this)">
+            <div class="desc">Cserepek</div>
+        </div>
+
+        <div class="gallery">
+            <img src="faamyag.jpg" alt="Faanyag" onclick="openModal(this)">
+            <div class="desc">Faanyag</div>
+        </div>
+
+        <div class="gallery">
+            <img src="Homok, sóder.jpg" alt="Homok, sóder" onclick="openModal(this)">
+            <div class="desc">Homok, sóder</div>
+        </div>
+
+        <div class="gallery">
+            <img src="Téglák.jpg" alt="Téglák" onclick="openModal(this)">
+            <div class="desc">Téglák</div>
+        </div>
+
+        <div class="gallery">
+            <img src="Kerítéselemek.jpeg" alt="Kerítéselemek" onclick="openModal(this)">
+            <div class="desc">Kerítéselemek</div>
+        </div>
+
+        <div class="gallery">
+            <img src="csempe.jpg" alt="Csempék" onclick="openModal(this)">
+            <div class="desc">Csempék</div>
+        </div>
+
+        <div class="gallery">
+            <img src="beton.png" alt="Beton" onclick="openModal(this)">
+            <div class="desc">Beton; 25, 30, 40kg-os kiszerelésekben</div>
+        </div>
+
+        <div class="gallery">
+            <img src="Vízszigetelő lemez.jpg" alt="Vízszigetelő lemez" onclick="openModal(this)">
+            <div class="desc">Vízszigetelő lemez</div>
+        </div>
+
+        <div class="gallery">
+            <img src="Fém csövek.jpg" alt="Fém csövek" onclick="openModal(this)">
+            <div class="desc">Fém csövek</div>
+        </div>
+
+        <div class="gallery">
+            <img src="Tábla gipszkarton.png" alt="Tábla gipszkarton" onclick="openModal(this)">
+            <div class="desc">Tábla gipszkarton</div>
+        </div>
+
+        <div class="gallery">
+            <img src="Forgácslemez.png" alt="Forgácslemez" onclick="openModal(this)">
+            <div class="desc">Forgácslemez</div>
+        </div>
+
+        <div class="gallery">
+            <img src="Kamion.jpg" alt="Kamion" onclick="openModal(this)">
+            <div class="desc">Szállítás teherautóval</div>
+        </div>
+
+        <div class="gallery">
+            <img src="kamion2.jpg" alt="Kamion" onclick="openModal(this)">
+            <div class="desc">Szállítás teherautóval</div>
+        </div>
+
+    </div>  
+    <div class="info-box">
+        Termékeinket nagy odafigyeléssel, tehergépkocsival szállítjuk, hogy biztosítsuk azok sértetlenségét a szállítás során. Munkatársaink jól képzettek, minden lépést precízen végeznek el, a megfelelő csomagolástól a célállomásra történő biztonságos eljuttatásig. Figyelünk a határidők betartására, hogy vásárlóink időben és sértetlenül vehessék át a termékeket.
+    </div>
+    <!-- Modális ablak előkészítése -->
+<div id="myModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <span class="prev" onclick="changeImage(-1)">&#10094;</span>
+    <img class="modal-content" id="modalImg">
+    <span class="next" onclick="changeImage(1)">&#10095;</span>
+</div>
+
+
+    <!-- Modális ablak előkészítése -->
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImg">
+    </div>
+
+    <script>
+        // A modális ablak megnyitása
+        function openModal(imgElement) {
+            var modal = document.getElementById("myModal");
+            var modalImg = document.getElementById("modalImg");
+            modal.style.display = "block";
+            modalImg.src = imgElement.src;
+        }
+
+        // A modális ablak bezárása
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+
+        // Ha a háttérre kattintunk, bezárja a modált
+        window.onclick = function(event) {
+            var modal = document.getElementById("myModal");
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+        let currentIndex = 0;  // A jelenlegi kép indexe
+let images = [];  // A képek listája
+
+// A képek összegyűjtése az oldalról
+const galleryImages = document.querySelectorAll('.gallery img');
+galleryImages.forEach(img => images.push(img.src));
+
+function openModal(imgElement) {
+    currentIndex = images.indexOf(imgElement.src);  // Beállítjuk a kép indexét
+    var modal = document.getElementById("myModal");
+    var modalImg = document.getElementById("modalImg");
+    modal.style.display = "block";
+    modalImg.src = imgElement.src;
+}
+
+function closeModal() {
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";
+}
+
+function changeImage(direction) {
+    // Kép indexének módosítása balra (−1) vagy jobbra (+1)
+    currentIndex += direction;
+
+    // A galéria képei körkörösen mozogjanak
+    if (currentIndex < 0) {
+        currentIndex = images.length - 1;
+    } else if (currentIndex >= images.length) {
+        currentIndex = 0;
+    }
+
+    var modalImg = document.getElementById("modalImg");
+    modalImg.src = images[currentIndex];  // Kép frissítése
+}
+// Eseményfigyelő hozzáadása az ESC billentyű lenyomására
+document.addEventListener('keydown', function(event) {
+    if (event.key === "Escape") {
+        closeModal();  // Bezárja a modális ablakot, ha ESC billentyűt nyomtak
+    }
+});
+
+function openModal(imgElement) {
+    currentIndex = images.indexOf(imgElement.src);  // Beállítjuk a kép indexét
+    var modal = document.getElementById("myModal");
+    var modalImg = document.getElementById("modalImg");
+    modal.style.display = "block";
+    modalImg.src = imgElement.src;
+}
+
+function closeModal() {
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";
+}
+
+
+const menuToggle = document.querySelector('.menu-toggle');
+const menu = document.querySelector('.menu');
+
+menuToggle.addEventListener('click', () => {
+  menuToggle.classList.toggle('open');
+  menu.classList.toggle('open');
+});
+
+// Vissza navigálás funkció
+function goBack() {
+    window.history.back();  // Visszalépés a böngésző előző oldalára
+}
+
+    </script>
+</body>
+</html>
