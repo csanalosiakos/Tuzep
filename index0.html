@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <title>Mester Építő Tüzép</title>
+  <link rel="icon" href="Logo.png" type="image/png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <video autoplay muted loop id="myVideo">
+    <source src="Háttérvideó.mp4" type="video/mp4">
+  </video>
+</head>
+<body>
+  
+  <style>
+    body, h1, h2 {
+      font-family: "Raleway", sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      scroll-behavior:auto;
+      scroll-snap-type: x mandatory;
+      overflow-x: hidden;
+      overflow-y: auto;
+      z-index: 1; /* Háttérbe helyezés */
+    }
+
+
+    #myVideo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    section {
+      scroll-snap-align: start;
+      height: 100vh;
+    }
+
+    .us-section, .bgimg, .bgimg2, .wedding-section, .rsvp-section {
+      scroll-snap-align: start;
+    }
+
+    .bgimg {
+      background-image: url("hatterkep.jpg");
+      background-size: cover;
+      background-position: center center;
+      height: 100vh;  /* A háttérkép teljes magasságot foglal el */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .us-section {
+      position: relative;
+      background-color: rgba(4, 42, 43);
+      color: white;
+      padding: 64px 16px;
+      letter-spacing: 3px;
+    }
+
+    .us-section h1 {
+      font-family: 'Raleway', sans-serif;
+      text-transform: uppercase;
+    }
+
+    .vertical-strip {
+      position: absolute;
+      left: 40px;
+      top: 60px;
+      height: calc(100% - 60px - 75px);
+      width: 5px;
+      background-color: white;
+    }
+
+    .wedding-section {
+      background-color: rgba(	65	57	58);
+      color: white;
+      padding: 64px 16px;
+    }
+
+    .rsvp-section {
+      background-color: rgba(	126	130	135);
+      color: white;
+      padding: 64px 16px;
+    }
+
+    .bgimg2 {
+      background-image: url("ret.jpg");
+      min-height: 100%;
+      background-position: center;
+      background-size: cover;
+    }
+
+    @keyframes fadeInZoom {
+      0% {
+        opacity: 0;
+        transform: scale(0.85);
+      }
+    }
+
+    .w3-display-middle {
+      animation: fadeInZoom 2s ease-in-out;
+    }
+
+    .w3-display-middle:hover {
+      color: #ffcc00; 
+      transition: color 0.5s ease;
+    }
+
+    /* Az új szakasz a háttérképpel */
+    .background-section {
+      background-image: url("Iroda.jpg");
+      background-size: cover;
+      background-position: center center;
+      height: 100vh; /* Kitölti a képernyőt */
+    }
+
+.fredericka-the-great-regular {
+  font-family: "Fredericka the Great", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Alap stílusok a táblázathoz */
+table {
+    width: 60%; /* A táblázat szélessége */
+    border-collapse: collapse; /* Határok összeolvasztása */
+}
+
+th, td {
+    padding: 10px; /* Cellák közötti távolság */
+    text-align: center; /* A szövegek középre igazítása */
+    border: 1px solid #ddd; /* Finom szürke határok */
+}
+
+th {
+    background-color: #4CAF50; /* Fejléc háttérszíne */
+    color: white; /* Fejléc szövegének színe */
+}
+
+td {
+    font-size: 18px; /* A szöveg betűmérete */
+}
+.wedding-section {
+  position: relative; /* Szükséges a vertical strip helyzetéhez */
+}
+
+/* Menü gomb (toggle) alap stílusai */
+.menu-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 30px;
+  z-index: 1000;  /* Győződjünk meg arról, hogy a gomb mindig a többi tartalom felett legyen */
+  margin-right: 30px;
+}
+
+.bar {
+  width: 35px;
+  height: 5px;
+  background-color: black;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* A menü gomb "open" állapotában a vonalak átalakulnak kereszt alakzattá */
+.menu-toggle.open .bar:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.menu-toggle.open .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.open .bar:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+/* A menü rejtett alapértelmezett stílusa */
+.menu {
+  position: fixed;
+  top: 60px; /* A menü a gomb alatt jelenjen meg */
+  right: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  display: none; /* Alapértelmezett rejtett állapot */
+  z-index: 999;  /* Győződjünk meg arról, hogy a menü a többi tartalom felett van */
+}
+
+.menu.open {
+  display: block;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu ul li {
+  border-bottom: 1px solid #eee;
+}
+
+.menu ul li:last-child {
+  border-bottom: none;
+}
+
+.menu a {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.menu a:hover {
+  background-color: #f0f0f0;
+}
+
+.playwrite-is-welcome-text {
+      font-family: "Playwrite IS", serif;
+      font-optical-sizing: auto;
+      font-weight: 300; /* Könnyedebb megjelenés */
+      font-style: normal;
+    }
+
+    /* 300-as súly (könnyű betűtípus) */
+    .zilla-slab-light {
+  font-family: "Zilla Slab", serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* 400-as súly (normál betűtípus) */
+.zilla-slab-regular {
+  font-family: "Zilla Slab", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* 500-ös súly (közepes vastagságú betűtípus) */
+.zilla-slab-medium {
+  font-family: "Zilla Slab", serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* 600-as súly (félvastag betűtípus) */
+.zilla-slab-semibold {
+  font-family: "Zilla Slab", serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* 700-as súly (vastag betűtípus) */
+.zilla-slab-bold {
+  font-family: "Zilla Slab", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.zilla-slab-light-italic {
+  font-family: "Zilla Slab", serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.zilla-slab-regular-italic {
+  font-family: "Zilla Slab", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.zilla-slab-medium-italic {
+  font-family: "Zilla Slab", serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.zilla-slab-semibold-italic {
+  font-family: "Zilla Slab", serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.zilla-slab-bold-italic {
+  font-family: "Zilla Slab", serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+
+
+  </style>
+ <a href="index0.html">
+  <img src="Logónk0.png" style="width: 15%; margin-top: 20px; margin-left: 20px;">
+</a>
+  <header class="w3-display-container w3-wide bgimg" id="home">
+    <div class="black-strip"></div>
+    <div class="w3-display-middle w3-text-white w3-center">
+      <h1 style="font-size: 450%; text-shadow: 1.5px 1.5px 0 black, -1.5px 1.5px 0 black, 1.5px -1.5px 0 black, -1.5px -1.5px 0 black;" class="playwrite-is-welcome-text">Üdvözöljük!</h1>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Playwrite+IS:wght@100..400&display=swap" rel="stylesheet">
+    </div>
+  </header>
+
+
+  <div class="menu-toggle">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </div>
+
+  <nav class="menu">
+    <ul>
+      <li><a href="Munkafüzet1 3.htm" target="_blank">Irányárak</a></li>
+      <li><a href="Prospektus_1.pdf" target="_blank">Termékeink</a></li>
+      <li><a href="Galéria.html" target="">Galéria</a></li>
+      <li><a href="#contact" target="_self">Elérhetőség</a></li>
+      <li><a href="index2.html" target="_self">Reklámunk</a></li>
+    </ul>
+  </nav>
+  
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('.menu');
+  
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('open');
+      menu.classList.toggle('open');
+    });
+  </script>
+
+<button id="scrollToTopBtn" onclick="scrollToTop()">
+  <img src="gomb.png" alt="Scroll to Top" />
+</button>
+
+<style>
+  /* Alap stílusok */
+body {
+font-family: Arial, sans-serif;
+line-height: 1.6;
+padding-bottom: 0px; /* Hogy a gomb ne legyen alul levágva */
+height: max-content; /*A `height: max-content;` azt jelenti, hogy az elem magassága akkora lesz, amekkora a benne lévő tartalomhoz szükséges. Azaz a magasság automatikusan a tartalom maximális magasságához igazodik.*/
+}
+
+.content {
+height: 2000px; /* Hosszú oldal a görgetéshez */
+padding: 20px;
+}
+
+/* A görgető gomb stílusa */
+#scrollToTopBtn {
+position: fixed;
+bottom: 20px;   
+right: 20px;
+background-color: white;
+border: none;
+border-radius: 50%; /* Kör alakú */
+padding: 10px; /* A gomb kör alakúvá tételéhez szükséges belső margó */
+width: 70px; /* A gomb szélessége */
+height: 70px; /* A gomb magassága */
+cursor: pointer;
+display: none; /* Kezdetben rejtve van */
+z-index: 4;
+}
+
+#scrollToTopBtn img {
+width: 50px; /* A gomb mérete */
+height: 50px;
+}
+
+/* A gomb megjelenése, ha elérhetővé válik */
+#scrollToTopBtn.show {
+display: block;
+}
+
+</style>
+
+<script>
+// Kapcsoljuk be a görgető gombot, amikor a felhasználó lefelé görget
+window.onscroll = function() {
+let button = document.getElementById("scrollToTopBtn");
+if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+  button.classList.add("show");
+} else {
+  button.classList.remove("show");
+}
+};
+
+// A tetejére görgetés funkció
+function scrollToTop() {
+window.scrollTo({
+  top: 0,
+  behavior: 'smooth' // Lassan görget a tetejére
+});
+}
+
+</script>
+
+  <div class="us-section" id="us">
+    <div class="vertical-strip"></div> 
+    <div class="w3-content">
+      <h1 class="w3-center"><b style="letter-spacing: 15px;">Tüzépünk</b></h1>
+      <div style="display: flex; align-items: flex-start; margin: 32px 0;">
+        <img class="w3-round" src="Tüzép_háttérkép.jpg" style="width: 50%; border-radius: 25px 25px 25px 0px; margin-right: 16px;">
+        <div style="flex-grow: 1;">
+          <div style="line-height: 1.5; text-align: justify; margin: 0; margin-top: 20px;">
+            A mi tüzépünk több, mint egy egyszerű építőanyag-kereskedés – itt a minőség, a szakértelem és az ügyfélközpontúság találkozik. Küldetésünk, hogy minden vásárlónk számára a legjobb megoldásokat nyújtsuk, legyen szó kisebb házfelújításról vagy nagyobb építkezési projektekről.
+          </div>
+        </div>
+      </div>
+      <figure style="display: flex; align-items: flex-start; justify-content: flex-start; margin-top: 20px;">
+        <div style="flex-grow: 1; margin-right: 18px; margin-top: 3%;">
+          <h3 style="letter-spacing: 5px; margin-top: 8%;" font-family: "Raleway", sans-serif;><b >Miért válassza a mi tüzépünket?</b></h3>
+          <p style="text-align: justify; margin-left: -8%; max-width: 110%; line-height: 24px;">
+            <ol>
+              <li>Széles választék: Kínálatunkban minden megtalálható, amire építkezéskor vagy felújításkor szüksége lehet – téglák, csempék, homok, sóder, faanyagok, tetőfedő anyagok, és még sok más.</li>
+              <li style="margin-top: 10px;">Kiemelkedő minőség: Csak olyan beszállítókkal dolgozunk, akik garantálják a legjobb alapanyagokat, hogy a végeredmény tartós és esztétikus legyen.</li>
+              <li style="margin-top: 10px;">Versenyképes árak: Nálunk nem csak a minőségre figyelünk, hanem arra is, hogy áraink megfizethetők legyenek.</li>
+              <li style="margin-top: 10px;">Gyors és precíz szállítás: Tehergépkocsival történő szállítási szolgáltatásunk biztosítja, hogy a megvásárolt anyagok időben és sértetlenül érjenek célba.</li>
+              <li style="margin-top: 10px;">Szakértői segítség: Tapasztalt munkatársaink örömmel segítenek Önnek a megfelelő anyagok kiválasztásában, hogy projektje gördülékenyen haladjon.</li>
+            </ol>
+          </p>
+        </div>
+        <div style="margin-left: 36px;">
+          <img src="Farakodas.jpg" alt="Markus" style="width: 30rem; margin-right: -48px; border-radius: 25px 0px 25px 25px; margin-top: 10%;">
+          <img src="Tetőalattielemek.jpg" alt="Markus" style="width: 30rem; margin-right: -48px; border-radius: 25px 25px 25px 0px; margin-top: 10%;">
+        </div>
+      </figure>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap" rel="stylesheet">
+      <p class="fredericka-the-great-regular" style="font-size: 450%;">Nyitvatartás</p>   <!--frederica the great--> 
+      <table class="fredericka-the-great-regular" style="margin-top: -44%; margin-bottom: 5%;">
+        <h4 style="margin-left: 65%; margin-top: -15%;" class="zilla-slab-regular"> Ismerje meg a <font style="color: #188b78;">Mesterépítő Tüzép</font> világát!</h4><br>
+        <p style="margin-left: 65%; text-align: right; text-align: justify;">
+          Fedezze fel prospektusunkban, miért vagyunk több, mint egy építőanyag-kereskedés! Nálunk a minőség, a szakértelem és az ügyfélközpontúság kéz a kézben jár. Legyen szó kisebb házfelújításról vagy nagyszabású építkezési projektekről, nálunk garantáltan megtalálja a legjobb megoldásokat. Ha minőségi építőanyagokra és megbízható szolgáltatásra van szüksége, keressen minket bizalommal! Tegye gördülékennyé építkezési vagy felújítási projektjét – mi minden lépésnél ott leszünk Ön mellett!</p><br>
+          <!-- Böngésszen a prospektusunkban, és fedezze fel a lehetőségeket! Ismerje meg termékeinket, szolgáltatásainkat, valamint az egyedi ajánlatainkat, amelyek segítenek Önnek elérni céljait. Ha bármilyen kérdése lenne, ügyfélszolgálatunk készséggel áll rendelkezésére. -->
+        <h4><a href="A mi tüzépünk_removed.pdf" target="_blank" style="display: block; text-align: right; margin-left: 61%; color: #902D41; max-width: 15%;"><strong>Szórólap</strong></a></h4>
+        <tr>
+            <td>Hétfő</td>
+            <td>8:00 - 15:00</td>
+        </tr>
+        <tr>
+          <td>Kedd</td>
+          <td>8:00 - 15:00</td>
+        </tr>
+        <tr>
+          <td>Szerda</td>
+          <td>8:00 - 15:00</td>
+        </tr>
+        <tr>
+          <td>Csütörtök</td>
+          <td>8:00 - 15:00</td>
+        </tr>
+        <tr>
+          <td>Péntek</td>
+          <td>8:00 - 15:00</td>
+        </tr>
+        <tr>
+          <td>Szombat</td>
+          <td>8:00 - 12:00</td>
+        </tr>
+        <tr>
+          <td>Vasárnap</td>
+          <td>Zárva</td>
+        </tr>
+    </table>
+    <p style="margin-top: -10px;">* Ünnepnapokon zárva</p>
+    </div>
+
+  </div>
+  <div class="background-section"></div>
+  <div class="wedding-section" id="wedding">
+    <div class="vertical-strip"></div>
+    <div class="w3-content">
+      <h1 class="w3-text-white"><b style="letter-spacing: 4px;">Mirő szól a weblapunk?</b></h1>
+      <img class="w3-round-large" src="Bejárat.jpg" style="width:100%;margin:64px 0">
+      <div class="w3-row">
+        <div class="w3-half" style="text-align: justify; min-width: 100%;">
+          <span style="letter-spacing: 3px;">Weblapunk a tüzépünket mutatja be, ahol a minőség, a szakértelem és az ügyfélközpontúság kerül előtérbe. Fedezze fel kínálatunkat, és találja meg a legjobb megoldásokat építkezési vagy felújítási projektjeihez! Ha tanácsra van szüksége, szakértő kollégáink készséggel állnak rendelkezésére, hogy a lehető legjobb döntést hozhassa meg. Látogasson el hozzánk személyesen vagy vegye fel velünk a kapcsolatot telefonon. </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wedding-section" id="wedding" style="background-color: #344055;">
+    <div class="vertical-strip"></div>
+    <div class="w3-content">
+      <h1 class="w3-text-white"><b style="letter-spacing: 4px;">Névjegykártyánk</b></h1>
+      <div class="w3-row" style="display: flex; align-items: center; justify-content: space-between;">
+
+        <div class="w3-half" style="text-align: justify; flex: 1; margin-top: -5px;">
+          <span style="letter-spacing: 3px;"> 
+             Ha bármilyen kérdése van, további információra van szüksége, vagy bármilyen problémával szembesül, ne habozzon kapcsolatba lépni velünk! Csapatunk elkötelezett amellett, hogy minden kérdésére választ adjunk, és az Ön igényeinek megfelelő segítséget nyújtsuk. Keressen minket bizalommal az alábbi e-mail címen: mesterepito.tuzep@gmail.com. Írjon bátran, és igyekszünk a lehető legrövidebb időn belül válaszolni Önnek! 
+              <!-- <center> Mesterépítő Tüzép <br>
+              Elérhetőség: <br>
+              Telefon: +36 00 127 5622 <br>
+              E-mail: mesterepito.tuzep@gmail.com <br>
+              Weboldal: mesteretuzep.hu <br>
+              Cím: 6771, Szeged, Makai út 204 <br></center> -->
+            </span>
+        </div>
+
+        <div class="w3-half" style="flex: 1; text-align: right;" id="contact">
+          <img class="w3-round-large" src="Névjegykártyánk.png" style="width: 140%; margin-top: -30px;">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="rsvp-section w3-center w3-wide" id="rsvp">
+    <h1>Köszönjük a figyelmet!</h1> 
+    <p class="w3-large">Visszavárunk legközelebb! 🙂</p>
+    <p class="w3-xlarge">
+      <hr style="width: 10%; height: 20px; background-color: #1e82c5; border: none; margin: 0 auto; border-radius: 3px;">  
+    </p>
+  </div>
+
+  <footer class="w3-center w3-black w3-padding-16">
+    <p style="letter-spacing: 2px;">Készítették: Botos Nóra, Poczik Patrik, Csanálosi Ákos ©</p>
+  </footer>
+
+  <script>
+    // Az elemek, amelyeket görgetéskor animálni szeretnénk
+const scrollText = document.querySelectorAll('.scroll-text');
+
+// Funkció, amely akkor aktiválja az animációt, amikor az elem a képernyőre kerül
+function checkScroll() {
+  scrollText.forEach(text => {
+    const rect = text.getBoundingClientRect();
+    if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+      text.classList.add('visible');
+    }
+  });
+}
+
+
+  </script>
+
+</body>
+</html>
